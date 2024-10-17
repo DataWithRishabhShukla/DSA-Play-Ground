@@ -149,10 +149,136 @@ B = 0
 subarray_with_sum_b(A,B)
 
 
-start_new("Longest Subarray Zero SumB")
-A = [1, 0, 1]
-B = 1
 
-A = [0, 0, 0]
-B = 0
-subarray_with_sum_b(A,B)
+def longest_subsrray_withsum_zero(A):
+    n = len(A)
+
+    psum = [0] * n
+    psum[0] = A[0]
+
+    for i in range(1,n):
+        psum[i] = psum[i-1] + A[i]
+    
+    print(A)
+    print(psum)
+    ans = 0
+    hm = {}
+    for j in range(n) :
+        print(hm)
+        if psum[j] == 0:
+            ans = max(ans,j+1)
+        
+        if psum[j] in hm :
+            print("Inside the if psum[j] exist ")
+            print(f"Pre ans , j :{ans, j}")
+            ans = max(ans,j- hm[psum[j]] )
+            print(f"post ans , j :{ans, j}")
+        else :
+            hm[psum[j]] = j
+    print(f"Maximum length is : {ans}")
+
+
+
+start_new("Longest Subarray Zero Sum")
+
+A = [1, -2, 1, 2]
+A = [3, 2, -1]
+A = [1, -2, 1, 2]
+A = [9,-20,-11,-8,-4,2,-12,14,1]
+A = [-16,16,1]
+longest_subsrray_withsum_zero(A)
+
+
+
+def distinct_number_in_window(A,B):
+    hm = {}
+    res = []
+
+    for i in range(B):
+        if A[i] in hm :
+            hm[A[i]]    += 1
+        else :
+            hm[A[i]]    = 1 
+
+    res.append(len(hm))
+
+    for j in range(B,len(A)):
+        out_ele = A[j-B]
+        if hm[out_ele] == 1 :
+            del hm[out_ele]
+        else :
+            hm[out_ele] -= 1
+        
+        in_ele = A[j]
+        if in_ele in hm :
+            hm[in_ele]    += 1           
+        else :
+            hm[in_ele]    = 1
+        
+        res.append(len(hm))
+    
+    print(res)
+
+     
+
+start_new("Distinct Numbers in Window")
+
+A = [1, 2, 1, 3, 4, 3]
+B = 3
+distinct_number_in_window(A,B)
+
+
+
+start_new("Max Sum Contiguous Subarray")
+
+def max_sum_subarray(A):
+    csum = 0
+    msum = float("-inf")
+
+    for num in A:
+        csum += num 
+        msum = max(msum , csum)
+
+        if csum < 0:
+            csum = 0
+    
+    print(f"max possible sum is :{msum}")
+
+A = [-2, 1, -3, 4, -1, 2, 1, -5, 4] 
+max_sum_subarray(A)
+
+
+def rain_water_trapped(A):
+    # get the max on the both left and right 
+    # Get the min of min(letf_max, right_max) - A[i]
+    # if prev step answer > 0 , add to final answer 
+
+    n = len(A)
+    print()
+    l_max,r_max = [0]*n , [0]* n
+    l_max[0] = A[0]
+
+    for i in range(1,n):
+        l_max[i] = max(l_max[i-1] , A[i])
+    print(f"Array is :{A}")
+    print(f"Left max array is : {l_max}")
+
+ 
+    r_max[n-1] = A[n-1]
+    for i in range(n-2,-1,-1):
+        r_max[i] = max(r_max[i+1] , A[i])
+    
+    print(f"Right max array is : {r_max}")
+    ans = 0
+    for i in range(1,n-1):
+        water = min(l_max[i],r_max[i]) - A[i]
+        if water > 0 :
+            ans += water
+    
+    print(f"Final answer is {ans}")
+
+
+
+start_new("Rain Water Trapped")
+A = [5, 4, 1, 4, 3, 2, 7]
+rain_water_trapped(A)
