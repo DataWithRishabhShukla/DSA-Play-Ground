@@ -48,7 +48,8 @@ def max_sum_sub_array(arr):
 def start_new(func_name):
     import os 
     os.system("clear")
-    print(f"Proessing for : {func_name}")
+    print(f"Proessing for : {func_name}!!!\n")
+    
 
 def first_non_repaeating_ele(arr):
     freq  = {}
@@ -282,3 +283,133 @@ def rain_water_trapped(A):
 start_new("Rain Water Trapped")
 A = [5, 4, 1, 4, 3, 2, 7]
 rain_water_trapped(A)
+
+
+def continuous_sum_query(A,B):
+    n = A
+    ans = [0] * n
+
+    for i in range(len(B)):
+        si = B[i][0] - 1
+        ei = B[i][1]
+
+        amt = B[i][2]
+        print(f"si, ei , amt :{si, ei , amt}")
+        ans[si] += amt
+
+        if ei  < n :
+            ans[ei] -= amt
+        print(ans)
+        print()
+    
+    print(ans)
+
+    # generating the prefix sum 
+    for j in range(1,len(ans)):
+        ans[j] = ans[j-1] + ans[j]
+    
+    print(ans)
+
+start_new("Continuous Sum Query")
+A = 5
+B = [[1, 2, 10], [2, 3, 20], [2, 5, 25]]
+continuous_sum_query(A,B)
+
+
+def print_boundry_selemts(arr):
+    i , j = 0 , 0 
+    n = len(arr)
+
+    # printing the first row 
+    for idx in range(1,n):
+        print(arr[i][j] , end = " ")
+        j += 1
+    
+    # printing last cols element 
+    for idx in range(1,n):
+        print(arr[i][j] , end = " ")
+        i = i+1
+
+    # printing last row element 
+    for idx in range(1,n):
+        print(arr[i][j], end = " ")
+        j = j -1 
+
+    # printing the first cols values 
+    for idx in range(1,n):
+        print(arr[i][j],end = " ")
+        i = i -1
+    
+    
+
+start_new("Print Boundry Elements")
+
+A = [[1,2,3,4,5], [6,7,8,9,10], [11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
+print_boundry_selemts(A)
+print()
+
+
+def print_spiral_matrix(arr):
+    r, c = 0,0
+    n = len(arr)
+    #print(f"r,c,n : {r,c,n}")
+
+    while r <= n and c <= n :
+        print(f"\nr,c,n : {r,c,n}")
+        print("Inside the loop !!!\n")
+        
+        for idx in range(1,n):
+            print(arr[r][c],end = " ")
+            c += 1
+
+        for idx in range(1,n):
+            print(arr[r][c],end = " ")
+            r += 1
+
+        for idx in range(1,n):
+            print(arr[r][c],end = " ")
+            c -= 1
+        
+        for idx in range(1,n):
+            print(arr[r][c],end = " ")
+            r -= 1
+        
+        r += 1
+        c += 1
+        n -= 2
+    
+    if n == 1 :
+        print("Inside the if block")
+        print(arr[r][c])
+
+start_new("Print Spiral Matrix Elements")
+
+A = [[1,2,3,4,5,6,7], [8,9,10,11,12,13,14], [15,16,17,18,19,20,21],[22,23,24,25,26,27,28],[29,30,31,32,33,34,35],[36,37,38,39,40,41,42],[43,44,45,46,47,48,49]]
+
+"""
+[01,02,03,04,05,06,07]
+[08,09,10,11,12,13,14]
+[15,16,17,18,19,20,21]
+[22,23,24,25,26,27,28]
+[29,30,31,32,33,34,35]
+[36,37,38,39,40,41,42]
+[43,44,45,46,47,48,49]
+"""
+print_spiral_matrix(A)
+
+
+def find_missing_number(arr):
+    n = len(arr)
+    print(f"Array before the replacing -ve,0 number :{arr}")
+    for i in range(n):
+        if arr[i] <= 0 :
+            arr[i] = n+2
+    
+    print(f"Array after the replacing -ve,0 number  :{arr}")
+    
+
+
+start_new("Find the first missing natural number !!!")
+A = [3, 4, -1, 1]
+find_missing_number(A)
+
