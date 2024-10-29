@@ -406,10 +406,144 @@ def find_missing_number(arr):
             arr[i] = n+2
     
     print(f"Array after the replacing -ve,0 number  :{arr}")
+
+    # marking the index 
+    for i in range(n):
+        ele = abs(arr[i])
+        if ele <= n and ele >= 1:
+            arr[ele-1] = -1 * abs(arr[ele-1])
+    print(f"Array after the marking index  :{arr}")
+    # Checking for the missing number 
+    for i in range(n):
+        if arr[i] > 0:
+            print(f"Missing number is :{i+1}")
+            break
     
+    print(f"Missing number is :{n+1}")
+    
+
+
 
 
 start_new("Find the first missing natural number !!!")
 A = [3, 4, -1, 1]
+A = [1, 2, 0]
+A= [-8, -7, -6]
 find_missing_number(A)
+
+def merge_sroted_intervals(arr):
+    n = len(arr)
+    start = arr[0][0]
+    end = arr[0][1]
+    res = []
+    print(f"First start and end are : {start , end }")
+
+    for i in range(1,n):
+        curr_start = arr[i][0]
+        curr_end = arr[i][1]
+        print(f"Processing for : {curr_start,curr_end}")
+
+        if curr_start <= end :
+            start = min(curr_start,start)
+            end = max(curr_end,end)
+        else:
+            res.append([start,end])
+            start = curr_start
+            end = curr_end
+    
+    res.append([start,end])
+    print(f"Final result is :{res} ")
+
+start_new("Merge Sorted Overlapping Intervals - 2 !!")
+A = [[1, 3], [2, 6], [8, 10], [15, 18] ]
+A = [ [2, 10], [4, 9], [6, 7] ]
+merge_sroted_intervals(A)
+
+
+def generateMatrix(A):
+    r,c = 0,0 
+    val = 1
+    mat = [[0 for _ in range(A)]for _ in range(A)]
+    print(mat)
+
+    while(A > 1):
+        for i in range(1,A):
+            mat[r][c] = val 
+            val += 1
+            c += 1
+        
+        for i in range(1,A):
+            mat[r][c] = val 
+            val += 1
+            r += 1
+        
+        for i in range(1,A):
+            mat[r][c] = val 
+            val += 1
+            c -= 1
+        
+        for i in range(1,A):
+            mat[r][c] = val 
+            val += 1
+            r -= 1
+        
+        r += 1
+        c += 1
+        A -= 2
+    
+    if A ==1 :
+        mat[r][c] = val
+       
+    print(mat)
+
+
+start_new("Spiral Order Matrix II !!")
+A = 5
+generateMatrix(A)
+
+
+def find_in_2D_array_top_right(A,B):
+    r = 0
+    c = len(A[0]) - 1
+    print(r,c)
+
+    while r < len(A) and c >= 0:
+        if A[r][c] == B:
+            print(f"Elelemnt found at loc :{r,c}")
+            print(f"Return value : {(r+1)*1009+(c+1)}") 
+            return
+        elif A[r][c] < B :
+            r += 1
+        else :
+            c -= 1
+    return -1
+
+def find_in_2D_array_bottom_left(A,B):
+    r = len(A) - 1
+    c = 0
+    print(r,c)
+
+    while r >= 0  and c < len(A[0]) :
+        if A[r][c] == B:
+            print(f"Elelemnt found at loc :{r,c}")
+            print(f"Return value : {(r+1)*1009+(c+1)}") 
+            return
+        elif A[r][c] < B :
+            c += 1
+        else :
+            r -= 1
+    return -1
+
+start_new("Search in a row wise and column wise sorted matrix !!")
+A = [[1, 2, 3],
+     [4, 5, 6],
+     [7, 8, 9]]
+B = 2
+
+A = [[2,8,8,8],[2,8,8,8],[2,8,8,8]]
+B = 8
+
+find_in_2D_array_top_right(A,B)
+print('\n\n')
+find_in_2D_array_bottom_left(A,B)
 
