@@ -119,3 +119,38 @@ A = [0, 1, 2, 0, 1, 2]
 # A =[0]
 sort_by_color(A)
 
+
+def quick_sort_algo(A):
+    
+    def partition(arr, l, r):
+        pivot = arr[l]
+        first = l
+        l = l + 1
+        
+        while l <= r :
+            if arr[l] <= pivot :
+                l += 1
+            elif arr[r] > pivot :
+                r -= 1
+            else :
+                arr[r] , arr[l] = arr[l] , arr[r]
+        
+        arr[first] , arr[r] = arr[r] , arr[first]
+
+        return r
+    
+    def quick_sort_imp(arr, s , e):
+        if s>= e:
+            return 
+        p = partition(arr,s,e)
+        quick_sort_imp(arr, s , p-1)
+        quick_sort_imp(arr, p+1 , e)
+    
+    quick_sort_imp(A, 0,len(A)-1)
+
+    print(f"array after sorting is :{arr}")
+
+start_new("Q4. Quick Sort !!")
+A = [1, 4, 10, 2, 1, 5]
+quick_sort_algo(A)
+

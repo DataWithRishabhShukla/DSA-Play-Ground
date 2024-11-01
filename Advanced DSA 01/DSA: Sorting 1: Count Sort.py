@@ -64,6 +64,7 @@ def smallest_no_negative(arr):
             k += 1
     
     print(arr)
+    
 
 A = [-2,3,8,3,-2,3]
 smallest_no_negative(A)
