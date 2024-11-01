@@ -1,7 +1,7 @@
 def start_new(func_name):
     import os 
     os.system("clear")
-    print(f"Proessing for : {func_name}!!!\n")
+    print(f"Solving for : {func_name}!!!\n")
 
 
 from functools import cmp_to_key
@@ -63,4 +63,59 @@ print(f"Array after sorting : {A}")
 
 
 
+def partition_pivot(arr):
+    n = len(arr)
+    l , r = 0 , n-2
+    pivot = arr[n-1]
+    print(f"Initial Array :{arr}")
+    while l <=r :
+        if arr[l] < pivot :
+            l += 1
+        elif arr[r] > pivot :
+            r -= 1
+        else :
+            arr[l],arr[r] = arr[r] , arr[l]
+    
+    print(f"Value at l {l} index :{arr[l]}")
+    print(f"Value at r {r} index :{arr[r]}")
+    print(f"Array after fixing the order : {arr}")
+    print("Swapping the pivot element with l index !!")
+    arr[n-1] , arr[l] = arr[l] , arr[n-1]
+    print(f"Final array pivoting :{arr}")
+    
+
+
 start_new("Q5. Partition Index !!")
+A = [6, 2, 0, 4, 5]
+partition_pivot(A)
+
+
+
+def sort_by_color(A):
+
+    n = len(A)
+    i = 0
+    st_pnt = 0
+    end_pnt = n-1
+
+    while i <= end_pnt :
+
+        if A[i] == 0:
+             A[i] , A[st_pnt] = A[st_pnt] ,A[i]
+             i += 1
+             st_pnt += 1
+        elif A[i] == 2:
+             A[i] , A[end_pnt] = A[end_pnt] ,A[i]
+             end_pnt -= 1
+        else :
+            i += 1
+    
+    
+    print(f"Array after sorting is : {A}")
+
+
+start_new("Q2. Sort by Color !!")
+A = [0, 1, 2, 0, 1, 2]
+# A =[0]
+sort_by_color(A)
+
