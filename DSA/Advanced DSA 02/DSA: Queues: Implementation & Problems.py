@@ -58,3 +58,36 @@ class UserQueue:
         Returns whether the queue is empty.
         """
         return self.size == 0
+
+
+import os 
+
+os.system("clear")
+
+print("Section  - Advance DSA 02")
+print("Module   - DSA: Queues: Implementation & Problems")
+print("Problem  - Implementing Dqeueue !!\n")
+
+from collections import deque
+
+def test_dequeue():
+    dq = deque()
+
+    dq.append(1)  # insert at the end 
+    dq.append(2)
+    dq.append(3)
+    dq.append(4)
+    print(dq)
+
+    dq.appendleft(2)  # insert at the beginning  
+    print(dq)
+
+    print(dq.pop())  # delete from the end
+    print(dq)
+
+    print(dq.popleft())  # delete from the start 
+    print(dq)
+
+
+
+test_dequeue()
