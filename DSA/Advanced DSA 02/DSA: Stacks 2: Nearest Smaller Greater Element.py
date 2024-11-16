@@ -140,6 +140,7 @@ def largestRectangleArea(A):
         
         if len(stk) > 0:
             right[i] = stk[-1]
+
         stk.append(i)
 
     print(f"Smallest on the right : {right}")
@@ -166,3 +167,95 @@ def largestRectangleArea(A):
 A = [2, 1, 5, 6, 2, 3]
 largestRectangleArea(A)
 
+
+os.system("clear")
+print("Section   - Advance DSA 02")
+print("Module    - DSA: Stacks 2: Nearest Smaller/Greater Element")
+print("Problem 5 - Sum of max in all sub-array  !!\n")
+
+def sum_max_sub_array(arr):
+
+    n = len(arr)
+    ngl = [-1] * n
+    ngr = [-1] * n
+    stk = []
+
+    for i in range(n):
+        while len(stk) > 0 and arr[i] >= A[stk[-1]]:
+            stk.pop()
+        
+        if len(stk) > 0:
+            ngl[i] = stk[-1]
+        
+        stk.append(i)
+
+    stk = []
+
+    for i in range(n-1,-1,-1):
+        while len(stk) > 0 and arr[i] >= A[stk[-1]]:
+            stk.pop()
+        
+        if len(stk) > 0:
+            ngr[i] = stk[-1]
+        
+        stk.append(i)
+
+    print(f"arr : {arr}")
+    print(f"ngl : {ngl}")
+    print(f"ngr : {ngr}")
+
+
+    for i in range(n):
+        if ngr[i] == -1 :
+            ngr[i] = n
+    
+    print(f"ngr : {ngr}")
+
+    ans = 0
+    for i in range(n):
+        x1 = ngl[i]
+        x2 = ngr[i]
+
+        st = i - x1
+        ep = x2 - i 
+
+        sub = st * ep 
+        contri = arr[i] * sub
+        ans += contri
+    
+    print(f"Sum of max sub array is : {ans}")
+
+    nsl = [-1] * n
+    nsr = [-1] * n
+    stk = []
+
+    for i in range(n):
+        while len(stk) > 0 and arr[i] <= A[stk[-1]]:
+            stk.pop()
+        
+        if len(stk) > 0:
+            nsl[i] = stk[-1]
+        
+        stk.append(i)
+
+    stk = []
+
+    for i in range(n-1,-1,-1):
+        while len(stk) > 0 and arr[i] <= A[stk[-1]]:
+            stk.pop()
+        
+        if len(stk) > 0:
+            nsr[i] = stk[-1]
+        
+        stk.append(i)
+    
+    for i in range(n):
+        if nsr[i] == -1 :
+            nsr[i] = n
+
+    print(nsr)
+    print(nsl)
+
+
+A = [4, 7, 3, 8]
+sum_max_sub_array(A)
