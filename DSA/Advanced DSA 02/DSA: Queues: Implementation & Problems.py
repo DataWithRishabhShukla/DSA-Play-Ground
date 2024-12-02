@@ -91,3 +91,56 @@ def test_dequeue():
 
 
 test_dequeue()
+
+
+import os 
+
+os.system("clear")
+
+print("Section  - Advance DSA 02")
+print("Module   - DSA: Queues: Implementation & Problems")
+print("Problem  - Implementing sliding window maximum !!\n")
+
+def sliding_window_maximum(arr,B):
+    n = len(arr)
+    dq = deque()
+    ans = []
+
+    for i in range(B):
+
+        while len(dq) >0 and arr[i] >= arr[dq[-1]]:
+            dq.pop()
+
+        dq.append(i)
+
+    for i in ans :
+        print(arr[i], end= " ")
+
+    ans.append(dq[0])
+
+    start = 1
+
+    for i in range(B,n):
+        while len(dq) > 0 and arr[i] >= arr[dq[-1]]:
+            dq.pop()
+        
+        dq.append(i)
+
+        if len(dq) > 0 and dq[0] < start :
+            dq.popleft()
+        
+        
+        start += 1
+        ans.append(dq[0])
+    
+    for i in ans :
+        print(arr[i], end= " ")
+   
+        
+
+A = [1, 3, -1, -3, 5, 3, 6, 7]
+B = 3
+
+A = [10,9,8,7,6,5,4,3,2,1]
+B = 2
+sliding_window_maximum(A,B)
