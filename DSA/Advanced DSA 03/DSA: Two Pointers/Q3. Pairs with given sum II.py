@@ -12,7 +12,6 @@ def find_pair_with_sum(A, B):
         elif  sum < B :
             print("Inside the sum < B Block !!! ")
             s+=1
-
         else :
             # checking if there are no other elements in between 
 
@@ -30,10 +29,13 @@ def find_pair_with_sum(A, B):
                 ps += 1
             
             pe , count_e = e , 0 
+
             while A[pe] == A[e] :
                 count_e += 1
                 pe -= 1
             count += count_e * count_s
+            s = ps 
+            e = pe
 
             
          
@@ -42,4 +44,7 @@ def find_pair_with_sum(A, B):
 
 A = [1, 5, 7, 10]
 B = 8
+
+A = [1,1,1]
+B = 2
 find_pair_with_sum(A,B)
